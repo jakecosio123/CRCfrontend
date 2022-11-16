@@ -33,13 +33,13 @@ jobs:
     - name: Uploads to S3
       uses: shallwefootball/s3-upload-action@master
       with:
-        aws_bucket: ${{ AWS_BUCKET_SECRET }}
+        aws_bucket: ${{ secrets.AWS_BUCKET_SECRET }}
         source_dir: './website'
         destination_dir: ''
 
     - name: Invalidate Cloudfront Distribution
       uses: chetan/invalidate-cloudfront-action@v2
       env:
-        DISTRIBUTION: ${{ AWS_DISTRIBUTION_SECRET }}
+        DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION_SECRET }}
         PATHS: "/*"
         AWS_REGION: "us-east-1"
