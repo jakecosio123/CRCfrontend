@@ -40,3 +40,9 @@ jobs:
         DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION_SECRET }}
         PATHS: "/*"
         AWS_REGION: "us-east-1"
+    
+    - name: run cypress tests with firefox
+        uses: cypress-io/github-action@v2
+        timeout-minutes: 10
+        with:
+          browser: firefox
