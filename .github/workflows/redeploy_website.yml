@@ -42,7 +42,7 @@ jobs:
         AWS_REGION: "us-east-1"
     
     - name: run cypress tests with firefox
-      uses: cypress-io/github-action@v4.2.0
-      timeout-minutes: 10
+      uses: cypress-io/github-action@v4
       with:
         browser: firefox
+        working-directory: ./cypress/e2e
