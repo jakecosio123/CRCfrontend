@@ -1,0 +1,45 @@
+name: Website Redeploy
+
+on:
+  push:
+    branches:
+      - main
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+ id-token: write
+ contents: read
+
+jobs:
+  redeploy_website:
+    name: Redeploy Website
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@master
+      with:
+        role-to-assume: ${{ secrets.AWS_GITHUB_ACTIONS_ROLE_ARN_SECRET }}
+        role-session-name: github_actions_terraform_cred
+        aws-region: us-east-1
+
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+
+    - name: Uploads to S3
+      uses: shallwefootball/s3-upload-action@master
+      with:
+        aws_bucket: ${{ AWS_BUCKET_SECRET }}
+        source_dir: './website'
+        destination_dir: ''
+
+    - name: Invalidate Cloudfront Distribution
+      uses: chetan/invalidate-cloudfront-action@v2
+      env:
+        DISTRIBUTION: ${{ AWS_DISTRIBUTION_SECRET }}
+        PATHS: "/*"
+        AWS_REGION: "us-east-1"
