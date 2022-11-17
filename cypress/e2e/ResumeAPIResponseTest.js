@@ -2,7 +2,7 @@
 
 describe('API Test', () => {
     it('Tests the API Response', () => {
-        cy.request('POST', 'https://xfawqisho2.execute-api.us-east-1.amazonaws.com/Default', {})
+        cy.request('POST', 'https://crcapi.jcosioresume.com/CRCResource', {})
        .should((response) => {
             cy.log(JSON.stringify(response.body))
             cy.expect(response.status).to.eq(200)
