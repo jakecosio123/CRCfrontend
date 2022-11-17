@@ -16,6 +16,6 @@ fetch("https://crcapi.jcosioresume.com/CRCResource",{
         const countDiv = document.getElementById("VisitorCount");
         const countName = count.VisitorCount;
         const heading = document.createElement("h1");
-        heading.innerHTML = countName;
+        heading.innerHTML = "You are visitor " + countName;
         countDiv.appendChild(heading);
     }
