@@ -18,9 +18,7 @@ describe('API Test', () => {
     it('Tests the API Response', () => {
         cy.request('POST', 'https://crcapi.jcosioresume.com/CRCResource', {})
        .then((response1) => {
-            cy.log(JSON.stringify(response1.body)).then((response1) => {
-                const count1 = response1.body.ddbResponse.Attributes.VisitorCount
-            })})
+            cy.log(JSON.stringify(response1.body))})
         cy.wait(2000)
         cy.request('POST', 'https://crcapi.jcosioresume.com/CRCResource', {})
         .then((response2) => {
